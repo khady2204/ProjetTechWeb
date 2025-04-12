@@ -1,0 +1,41 @@
+<div class="admin-container">
+    <mat-card class="admin-card">
+      <h2 class="admin-title">Créer un Nouvel Utilisateur</h2>
+      <form (ngSubmit)="createUser()" #userForm="ngForm" class="admin-form">
+  
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Username</mat-label>
+          <input matInput type="text" [(ngModel)]="newUser.username" name="username" required>
+          <mat-icon matPrefix>person</mat-icon>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" [(ngModel)]="newUser.email" name="email" required>
+          <mat-icon matPrefix>mail</mat-icon>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" [(ngModel)]="newUser.password" name="password" required>
+          <mat-icon matPrefix>lock</mat-icon>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Rôle</mat-label>
+          <mat-select [(ngModel)]="newUser.role" name="role" required>
+            <mat-option value="ETUDIANT">Étudiant</mat-option>
+            <mat-option value="ENSEIGNANT">Enseignant</mat-option>
+            <mat-option value="ADMINISTRATIF">Administratif</mat-option>
+            <mat-option value="APPUI_INSERTION">Appui Insertion</mat-option>
+            <mat-option value="ADMIN">Administrateur</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <button mat-raised-button color="primary" class="create-button" type="submit">
+          <mat-icon>person_add</mat-icon> Créer Utilisateur
+        </button>
+      </form>
+    </mat-card>
+  </div>
+  
