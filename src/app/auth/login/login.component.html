@@ -1,0 +1,28 @@
+<div class="login-container">
+    <mat-card class="login-card">
+      <h2 class="login-title">CONNEXION</h2>
+      <form (ngSubmit)="login()" #loginForm="ngForm" class="login-form">
+  
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nom d'utilisateur</mat-label>
+          <input matInput type="email" [(ngModel)]="credentials.email" name="email" required>
+          <mat-icon matPrefix>person</mat-icon>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Mot de Passe</mat-label>
+          <input matInput type="password" [(ngModel)]="credentials.password" name="password" required>
+          <mat-icon matPrefix>lock</mat-icon>
+        </mat-form-field>
+  
+        <button mat-raised-button color="primary" class="login-button" type="submit">
+          <mat-icon>login</mat-icon> Connexion
+        </button>
+  
+        <div class="forgot-password">
+          <a href="#">Mot de Passe oublié ?</a>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+  
