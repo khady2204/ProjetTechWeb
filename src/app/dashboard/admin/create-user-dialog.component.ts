@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { UserService } from '../../services/user.service';
 import { FormsModule } from '@angular/forms';
+
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -7,11 +10,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
-import { CreateUserDialogComponent } from './create-user-dialog.component';
-
 
 @Component({
-  selector: 'app-admin',
+  selector: 'app-create-user-dialog',
   standalone: true,
   imports: [
     FormsModule,
@@ -21,13 +22,12 @@ import { CreateUserDialogComponent } from './create-user-dialog.component';
     MatButtonModule,
     MatIconModule,
     MatSelectModule,
-    MatOptionModule,
-    CreateUserDialogComponent
+    MatOptionModule
   ],
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss']
+  templateUrl: './create-user-dialog.component.html',
+  styleUrls: ['./create-user-dialog.component.scss']
 })
-export class AdminComponent {
+export class CreateUserDialogComponent {
   newUser = {
     username: '',
     email: '',
@@ -35,20 +35,24 @@ export class AdminComponent {
     role: ''
   };
 
+  constructor(
+    private dialogRef: MatDialogRef<CreateUserDialogComponent>,
+    private userService: UserService
+  ) {}
+
   createUser() {
-    console.log('Nouvel utilisateur créé:', this.newUser);
+    this.userService.createUser(this.newUser).subscribe({
+      next: () => {
+        alert('Utilisateur créé avec succès ✅');
+        this.dialogRef.close(true);
+      },
+      error: () => {
+        alert('Erreur ❌ lors de la création');
+      }
+    });
+  }
 
-    // Ici normalement tu fais une requête HTTP pour envoyer vers ton backend
-    // this.userService.createUser(this.newUser).subscribe(...)
-
-    alert('Utilisateur créé avec succès !');
-    
-    // Réinitialiser le formulaire
-    this.newUser = {
-      username: '',
-      email: '',
-      password: '',
-      role: ''
-    };
+  cancel() {
+    this.dialogRef.close();
   }
 }
